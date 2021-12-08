@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/models/categories.dart';
 
 enum CURRENT_STACK { intro, details }
 
@@ -16,6 +17,8 @@ class DrawerProvider extends ChangeNotifier {
     'scaleFactor': 1.0,
     'drawerOpen': false,
   };
+
+  var currentCategoryId = '';
 
   CURRENT_STACK currentStack = CURRENT_STACK.intro;
 
@@ -55,5 +58,17 @@ class DrawerProvider extends ChangeNotifier {
     currentStack = CURRENT_STACK.details;
     closeDrawer();
     notifyListeners();
+  }
+
+  void setCurrentCategoryId(String id) {
+    currentCategoryId = id;
+
+    notifyListeners();
+  }
+
+  Map<String, String> getCurrentCategoryDetails() {
+    return categories.firstWhere(
+        (element) => element['idCategory'] == currentCategoryId,
+        orElse: () => {});
   }
 }

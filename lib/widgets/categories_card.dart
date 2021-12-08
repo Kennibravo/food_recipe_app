@@ -1,13 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/models/categories.dart';
+import 'package:food_recipe_app/providers/drawer_provider.dart';
 import 'package:food_recipe_app/widgets/popular_food.dart';
+import 'package:provider/provider.dart';
 
 class CategoriesCard extends StatelessWidget {
   const CategoriesCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<DrawerProvider>(context, listen: false);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,6 +25,14 @@ class CategoriesCard extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.6,
               margin: const EdgeInsets.only(right: 20),
               child: GestureDetector(
+                onTap: () {
+                  provider.closeDrawer();
+                  provider.displayingDetails();
+                  
+                  provider.setCurrentCategoryId(
+                    categories[index]['idCategory']!,
+                  );
+                },
                 child: Stack(
                   children: [
                     Positioned(
@@ -95,7 +107,8 @@ class CategoriesCard extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 25),
                             child: Center(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "${categories[index]['calories']!} Kcal",
@@ -110,7 +123,8 @@ class CategoriesCard extends StatelessWidget {
                                     child: CircleAvatar(
                                       backgroundColor: Color(0xff416d6d),
                                       foregroundColor: Colors.white,
-                                      child: Icon(Icons.favorite_border_outlined),
+                                      child:
+                                          Icon(Icons.favorite_border_outlined),
                                     ),
                                   )
                                 ],
