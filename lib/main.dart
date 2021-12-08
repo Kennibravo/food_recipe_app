@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/providers/drawer_provider.dart';
 import 'package:food_recipe_app/providers/meal_category.dart';
+import 'package:food_recipe_app/screens/details_screen.dart';
 import 'package:food_recipe_app/screens/drawer_screen.dart';
 import 'package:food_recipe_app/screens/intro_screen.dart';
 import 'package:food_recipe_app/theme/custom_theme.dart';
@@ -18,12 +20,16 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: const [
-          DrawerScreen(),
-          IntroScreen(),
-        ],
+    return ChangeNotifierProvider(
+      create: (_) => DrawerProvider(),
+      child: Scaffold(
+        body: Stack(
+          children: const [
+            DrawerScreen(),
+            // DetailsScreen(),
+            IntroScreen(),
+          ],
+        ),
       ),
     );
   }

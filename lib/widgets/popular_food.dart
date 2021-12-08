@@ -35,60 +35,58 @@ class PopularFood extends StatelessWidget {
               ),
             ],
           ),
-          child: Container(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    CachedNetworkImage(
-                      imageUrl:
-                          'https://www.themealdb.com/images/category/lamb.png',
-                      width: 240,
-                      height: 200,
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 18),
-                        child: Column(
-                          children: [
-                            FittedBox(
-                              child: Text(
-                                'Lamb Meat',
-                                style: Theme.of(context).textTheme.subtitle1,
-                              ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  CachedNetworkImage(
+                    imageUrl:
+                        'https://www.themealdb.com/images/category/lamb.png',
+                    width: 240,
+                    height: 200,
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 18),
+                      child: Column(
+                        children: [
+                          FittedBox(
+                            child: Text(
+                              'Lamb Meat',
+                              style: Theme.of(context).textTheme.subtitle1,
                             ),
-                            const SizedBox(height: 10),
-                            const Text('Spicy with Garlic'),
-                            const SizedBox(height: 13),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text(
-                                  '150 Kcal',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text('Spicy with Garlic'),
+                          const SizedBox(height: 13),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text(
+                                '150 Kcal',
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                SizedBox(
-                                  width: 50,
-                                  height: 60,
-                                  child: CircleAvatar(
-                                    backgroundColor: Color(0xff416d6d),
-                                    foregroundColor: Colors.white,
-                                    child: Icon(Icons.favorite_border_outlined),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
+                              ),
+                              SizedBox(
+                                width: 50,
+                                height: 60,
+                                child: CircleAvatar(
+                                  backgroundColor: Color(0xff416d6d),
+                                  foregroundColor: Colors.white,
+                                  child: Icon(Icons.favorite_border_outlined),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              ],
-            ),
+                    ),
+                  )
+                ],
+              ),
+            ],
           ),
         ),
         const SizedBox(height: 30),
