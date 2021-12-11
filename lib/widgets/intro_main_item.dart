@@ -37,71 +37,65 @@ class _IntroMainItemState extends State<IntroMainItem> {
             top: mediaQuery.padding.top, bottom: mediaQuery.padding.bottom),
         color: Colors.white,
         child: SingleChildScrollView(
-          child: GestureDetector(
-            onTap: () {
-              widget.provider.closeDrawer();
-              widget.provider.displayingIntro();
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    widget.provider.introScreen['drawerOpen'] as bool
-                        ? IconButton(
-                            onPressed: () {
-                              widget.provider.closeDrawer();
-                            },
-                            icon: const FaIcon(
-                              FontAwesomeIcons.angleLeft,
-                              size: 20,
-                            ),
-                          )
-                        : IconButton(
-                            onPressed: () {
-                              widget.provider.openDrawer(mediaQuery);
-                            },
-                            icon: const FaIcon(
-                              FontAwesomeIcons.bars,
-                              size: 15,
-                            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  widget.provider.introScreen['drawerOpen'] as bool
+                      ? IconButton(
+                          onPressed: () {
+                            widget.provider.closeDrawer();
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.angleLeft,
+                            size: 20,
                           ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const FaIcon(
-                        FontAwesomeIcons.search,
-                        size: 15,
-                      ),
+                        )
+                      : IconButton(
+                          onPressed: () {
+                            widget.provider.openDrawer(mediaQuery);
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.bars,
+                            size: 15,
+                          ),
+                        ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const FaIcon(
+                      FontAwesomeIcons.search,
+                      size: 15,
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Recipex Food Recipes',
+                      style: Theme.of(context).textTheme.headline1,
+                    ),
+                    Text(
+                      'Healthy and nutritious food recipes',
+                      style: Theme.of(context).textTheme.bodyText1,
                     )
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Recipex Food Recipes',
-                        style: Theme.of(context).textTheme.headline1,
-                      ),
-                      Text(
-                        'Healthy and nutritious food recipes',
-                        style: Theme.of(context).textTheme.bodyText1,
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 35),
-                const CategoryItem(),
-                ElevatedButton(
-                  onPressed: () {
-                    widget.provider.displayingDetails();
-                  },
-                  child: Text('Change display'),
-                )
-              ],
-            ),
+              ),
+              const SizedBox(height: 35),
+              const CategoryItem(),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     widget.provider.displayingDetails();
+              //   },
+              //   child: Text('Change display'),
+              // )
+            ],
           ),
         ),
       ),

@@ -19,12 +19,35 @@ class _IntroScreenState extends State<IntroScreen> {
     return Stack(
       children: [
         provider.currentStack == CURRENT_STACK.intro
-            ? DetailsScreen(context)
-            : IntroMainItem(provider),
-
+            ? GestureDetector(
+                onTap: () {
+                  provider.closeDrawer();
+                  provider.displayingDetails();
+                },
+                child: DetailsScreen(context),
+              )
+            : GestureDetector(
+                onTap: () {
+                  provider.closeDrawer();
+                  provider.displayingIntro();
+                },
+                child: IntroMainItem(provider),
+              ),
         provider.currentStack == CURRENT_STACK.details
-            ? DetailsScreen(context)
-            : IntroMainItem(provider),
+            ? GestureDetector(
+                onTap: () {
+                  provider.closeDrawer();
+                  provider.displayingDetails();
+                },
+                child: DetailsScreen(context),
+              )
+            : GestureDetector(
+                onTap: () {
+                  provider.closeDrawer();
+                  provider.displayingIntro();
+                },
+                child: IntroMainItem(provider),
+              ),
       ],
     );
   }

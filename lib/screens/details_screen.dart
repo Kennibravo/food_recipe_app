@@ -43,189 +43,184 @@ class _DetailsScreenState extends State<DetailsScreen> {
           provider.currentStack == CURRENT_STACK.details ? 1 : 0.5,
         ),
         child: SingleChildScrollView(
-          child: GestureDetector(
-            onTap: () {
-              provider.closeDrawer();
-              provider.displayingDetails();
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    provider.introScreen['drawerOpen'] as bool
-                        ? IconButton(
-                            onPressed: () {
-                              provider.closeDrawer();
-                            },
-                            icon: const FaIcon(
-                              FontAwesomeIcons.angleLeft,
-                              size: 20,
-                            ),
-                          )
-                        : IconButton(
-                            onPressed: () {
-                              provider.openDrawer(mediaQuery);
-                            },
-                            icon: const FaIcon(
-                              FontAwesomeIcons.angleLeft,
-                              size: 22,
-                            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  provider.introScreen['drawerOpen'] as bool
+                      ? IconButton(
+                          onPressed: () {
+                            provider.closeDrawer();
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.angleLeft,
+                            size: 20,
                           ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const FaIcon(
-                        FontAwesomeIcons.heart,
-                        size: 20,
-                      ),
+                        )
+                      : IconButton(
+                          onPressed: () {
+                            provider.openDrawer(mediaQuery);
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.angleLeft,
+                            size: 22,
+                          ),
+                        ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const FaIcon(
+                      FontAwesomeIcons.heart,
+                      size: 20,
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      currentCategory['strCategory']!,
+                      style: const TextStyle(
+                          fontSize: 35, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      currentCategory['strShortDescription']!,
+                      style: Theme.of(context).textTheme.bodyText2,
                     )
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        currentCategory['strCategory']!,
-                        style: const TextStyle(
-                            fontSize: 35, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 35),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Nutritions',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        currentCategory['strShortDescription']!,
-                        style: Theme.of(context).textTheme.bodyText2,
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 35),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Nutritions',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.38,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 15),
+                              FoodInfoPill(currentCategory: currentCategory),
+                              const SizedBox(height: 15),
+                              FoodInfoPill(currentCategory: currentCategory),
+                              const SizedBox(height: 15),
+                              FoodInfoPill(currentCategory: currentCategory)
+                            ],
+                          ),
                         ),
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.38,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 15),
-                                FoodInfoPill(currentCategory: currentCategory),
-                                const SizedBox(height: 15),
-                                FoodInfoPill(currentCategory: currentCategory),
-                                const SizedBox(height: 15),
-                                FoodInfoPill(currentCategory: currentCategory)
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey[200]!,
+                                  blurRadius: 15,
+                                  offset: const Offset(0, 4),
+                                ),
                               ],
                             ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey[200]!,
-                                    blurRadius: 15,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(50),
-                                child: CachedNetworkImage(
-                                  width: 200,
-                                  height: 210,
-                                  fit: BoxFit.fill,
-                                  imageUrl:
-                                      currentCategory['strCategoryThumb']!,
-                                ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(50),
+                              child: CachedNetworkImage(
+                                width: 200,
+                                height: 210,
+                                fit: BoxFit.fill,
+                                imageUrl:
+                                    currentCategory['strCategoryThumb']!,
                               ),
                             ),
-                          )
-                        ],
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    const Text(
+                      'Ingredients',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
-                      const SizedBox(height: 15),
-                      const Text(
-                        'Ingredients',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                    ),
+                    Text(
+                      'Lorem ipsum dolor sit amet',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            fontSize: 18,
+                          ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      'consectetur adipiscing elit',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            fontSize: 18,
+                          ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      'sed do eiusmod tempor incididunt',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            fontSize: 18,
+                          ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      'laudantium, totam rem aperiam',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            fontSize: 18,
+                          ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      'voluptate velit esse quam nihil',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            fontSize: 18,
+                          ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      'odio dignissimos ducimus qui',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            fontSize: 18,
+                          ),
+                    ),
+                    const SizedBox(height: 25),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Recipe Preparation',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Lorem ipsum dolor sit amet',
-                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                              fontSize: 18,
-                            ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'consectetur adipiscing elit',
-                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                              fontSize: 18,
-                            ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'sed do eiusmod tempor incididunt',
-                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                              fontSize: 18,
-                            ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'laudantium, totam rem aperiam',
-                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                              fontSize: 18,
-                            ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'voluptate velit esse quam nihil',
-                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                              fontSize: 18,
-                            ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'odio dignissimos ducimus qui',
-                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                              fontSize: 18,
-                            ),
-                      ),
-                      const SizedBox(height: 25),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Recipe Preparation',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          // const SizedBox(height: 5),
-                          Text(
-                            '''At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio
-                          ''',
-                            style: TextStyle(fontSize: 18),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
+                        // const SizedBox(height: 5),
+                        Text(
+                          '''At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio
+                        ''',
+                          style: TextStyle(fontSize: 18),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 200),
+            ],
           ),
         ),
       );
